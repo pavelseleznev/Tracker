@@ -84,7 +84,7 @@ final class TrackerViewCell: UICollectionViewCell {
         viewCellEmoji.text = tracker.trackerEmoji
         let image = isCompletedToday ? doneImage : viewCellPlusImage
         viewCellPlusButton.setImage(image, for: .normal)
-        
+        viewCellPlusButton.alpha = isCompletedToday ? 0.3 : 1.0
         viewCellDayCounter.text = completedDays.days()
     }
     
