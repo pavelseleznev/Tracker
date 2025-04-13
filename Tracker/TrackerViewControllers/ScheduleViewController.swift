@@ -9,11 +9,11 @@ import UIKit
 
 final class ScheduleViewController: UIViewController {
     
-    //MARK: - Public Properties
+    // MARK: - Public Properties
     var initialSelectedWeekdays: [Weekdays?]?
     weak var delegate: ScheduleViewControllerDelegate?
     
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private  lazy var scheduleDoneButton: UIButton = {
         let scheduleDoneButton = UIButton()
         scheduleDoneButton.setTitle("Готово", for: .normal)
@@ -70,7 +70,7 @@ final class ScheduleViewController: UIViewController {
         setupSwitches()
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     private func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.topItem?.title = "Расписание"

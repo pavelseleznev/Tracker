@@ -9,10 +9,10 @@ import UIKit
 
 final class CreateTrackerViewController: UIViewController {
     
-    //MARK: - Public Property
+    // MARK: - Public Property
     weak var delegate: CreateTrackerViewControllerDelegate?
     
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private lazy var regularHabitButton: UIButton = {
         let regularHabitButton = UIButton()
         regularHabitButton.setTitle("Привычка", for: .normal)
@@ -53,6 +53,7 @@ final class CreateTrackerViewController: UIViewController {
         setupConstraints()
     }
     
+    // MARK: - Private Methods
     private func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.topItem?.title = "Создание трекера"
@@ -96,6 +97,7 @@ final class CreateTrackerViewController: UIViewController {
     }
 }
 
+// MARK: - CreateTrackerViewController TypeOfTrackerViewControllerDelegate
 extension CreateTrackerViewController: TypeOfTrackerViewControllerDelegate {
     func addNewTracker(newTracker: TrackerCategory) {
         delegate?.trackerCategoryList(newTracker: newTracker)

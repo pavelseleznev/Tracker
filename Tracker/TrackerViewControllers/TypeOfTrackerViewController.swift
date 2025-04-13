@@ -9,11 +9,11 @@ import UIKit
 
 final class TypeOfTrackerViewController: UIViewController {
     
-    //MARK: - Public Properties
+    // MARK: - Public Properties
     var typeOfTracker: Bool = false
     weak var delegate: TypeOfTrackerViewControllerDelegate?
     
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private  lazy var trackerNameInput: UITextField = {
         let trackerNameInput = UITextField()
         trackerNameInput.font = .systemFont(ofSize: 17, weight: .regular)

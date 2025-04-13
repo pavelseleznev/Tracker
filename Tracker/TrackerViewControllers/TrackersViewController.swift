@@ -9,7 +9,7 @@ import UIKit
 
 final class TrackersViewController: UIViewController {
     
-    //MARK: - Private Properties
+    // MARK: - Private Properties
     private var categories: [TrackerCategory] = []
     private var completedTrackers: [TrackerRecord] = []
     private var visibleCategories: [TrackerCategory] = []
@@ -133,7 +133,7 @@ final class TrackersViewController: UIViewController {
         tapToHideKeyboard()
     }
     
-    //MARK: - Private Methods
+    // MARK: - Private Methods
     private func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.topItem?.title = "Трекеры"

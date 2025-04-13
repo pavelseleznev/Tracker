@@ -9,22 +9,22 @@ import UIKit
 
 final class StatisticsViewController: UIViewController {
     
-    //MARK: Private Properties
+    // MARK: Private Properties
     private lazy var placeholderImageView: UIImageView = {
-        let image = UIImage(named: "StatPlaceholder")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+        let placeholderImage = UIImage(named: "StatPlaceholder")
+        let placeholderImageView = UIImageView(image: placeholderImage)
+        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
+        return placeholderImageView
     }()
     
     private lazy var placeholderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Анализировать пока нечего"
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textAlignment = .center
-        label.textColor = UIColor(named: "Black")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        let placeholderLabel = UILabel()
+        placeholderLabel.text = "Анализировать пока нечего"
+        placeholderLabel.font = .systemFont(ofSize: 12, weight: .medium)
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = UIColor(named: "Black")
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        return placeholderLabel
     }()
     
     private lazy var navigationBar: UINavigationBar = {
@@ -35,6 +35,7 @@ final class StatisticsViewController: UIViewController {
         return navigationBar
     }()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColor.ypWhite
@@ -43,6 +44,7 @@ final class StatisticsViewController: UIViewController {
         setupConstraints()
     }
     
+    // MARK: Private Methods
     private func setupSubviews(){
         view.addSubview(placeholderImageView)
         view.addSubview(placeholderLabel)
