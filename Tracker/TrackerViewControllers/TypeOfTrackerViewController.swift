@@ -56,7 +56,7 @@ final class TypeOfTrackerViewController: UIViewController {
         createTrackerButton.setTitle("Создать", for: .normal)
         createTrackerButton.layer.cornerRadius = 16
         createTrackerButton.backgroundColor = AppColor.ypGray
-        createTrackerButton.tintColor = AppColor.ypWhite
+        createTrackerButton.setTitleColor(AppColor.ypWhite, for: .normal)
         createTrackerButton.clipsToBounds = true
         createTrackerButton.isEnabled = false
         createTrackerButton.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +69,7 @@ final class TypeOfTrackerViewController: UIViewController {
         cancelButton.setTitle("Отменить", for: .normal)
         cancelButton.clipsToBounds = true
         cancelButton.tintColor = AppColor.ypRed
-        cancelButton.backgroundColor = .white
+        cancelButton.backgroundColor = AppColor.ypWhite
         cancelButton.layer.borderColor = UIColor.ypRed.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.cornerRadius = 16
@@ -82,7 +82,7 @@ final class TypeOfTrackerViewController: UIViewController {
         let trackerPropertiesTableView = UITableView()
         trackerPropertiesTableView.register(
             TrackerPropertiesCell.self,
-            forCellReuseIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue
         )
         trackerPropertiesTableView.separatorInset = UIEdgeInsets(
             top: 0,
@@ -186,7 +186,8 @@ final class TypeOfTrackerViewController: UIViewController {
             trackerName: trackerNameInput.text ?? "",
             trackerColor: self.color ?? .ypGreen,
             trackerEmoji: self.emoji ?? "❤️",
-            trackerSchedule: self.schedule)
+            trackerSchedule: self.schedule,
+            trackerDate: Date())
         let category = TrackerCategory(
             trackerCategoryTitle: self.categoryTitle ?? "Домашний уют",
             trackerCategoryList: [newTracker])
@@ -203,7 +204,7 @@ extension TypeOfTrackerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue,
+            withIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue,
             for: indexPath
         ) as? TrackerPropertiesCell else {
             return UITableViewCell()

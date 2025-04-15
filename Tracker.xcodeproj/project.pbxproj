@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D404ADA12DAB860900D31697 /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404ADA02DAB860900D31697 /* AccessibilityIdentifier.swift */; };
+		D404ADA12DAB860900D31697 /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404ADA02DAB860900D31697 /* ReuseIdentifier.swift */; };
 		D404ADA62DAB9EAE00D31697 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404ADA52DAB9EAE00D31697 /* UIViewController.swift */; };
 		D404ADA82DABBE9F00D31697 /* ExtensionInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D404ADA72DABBE9F00D31697 /* ExtensionInt.swift */; };
 		D4B43ECD2DA7911100963825 /* TrackerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B43ECC2DA7911100963825 /* TrackerViewCell.swift */; };
@@ -32,7 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D404ADA02DAB860900D31697 /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		D404ADA02DAB860900D31697 /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
 		D404ADA52DAB9EAE00D31697 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		D404ADA72DABBE9F00D31697 /* ExtensionInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionInt.swift; sourceTree = "<group>"; };
 		D4B43ECC2DA7911100963825 /* TrackerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerViewCell.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				D4C3EDCB2D8FD7CD0056B0D3 /* AppColor.swift */,
-				D404ADA02DAB860900D31697 /* AccessibilityIdentifier.swift */,
+				D404ADA02DAB860900D31697 /* ReuseIdentifier.swift */,
 				D4E2A4692DA365E100CE22BF /* Tracker.swift */,
 				D4E2A46B2DA365EA00CE22BF /* TrackerCategory.swift */,
 				D4E2A46D2DA365F900CE22BF /* TrackerRecord.swift */,
@@ -240,7 +240,7 @@
 				D4E2A46E2DA365F900CE22BF /* TrackerRecord.swift in Sources */,
 				D4FA52692DAA4407004559A4 /* HeaderSectionView.swift in Sources */,
 				D4E2A46A2DA365E100CE22BF /* Tracker.swift in Sources */,
-				D404ADA12DAB860900D31697 /* AccessibilityIdentifier.swift in Sources */,
+				D404ADA12DAB860900D31697 /* ReuseIdentifier.swift in Sources */,
 				D4C3EDD02D9650F90056B0D3 /* TabBarController.swift in Sources */,
 				D4FA52632DAA024F004559A4 /* CreateTrackerViewController.swift in Sources */,
 				D4C3EDB52D8FB96C0056B0D3 /* AppDelegate.swift in Sources */,

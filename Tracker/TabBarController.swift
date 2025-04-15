@@ -45,9 +45,18 @@ final class TabBarController: UITabBarController {
         ]
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            setupTabBarAppearance()
+        }
+    }
+    
     private func setupTabBarAppearance() {
         self.tabBar.layer.borderWidth = 0.5
-        self.tabBar.layer.borderColor = UIColor.gray.cgColor
+        self.tabBar.layer.borderColor = (self.traitCollection.userInterfaceStyle == .dark) ? UIColor.black.cgColor : UIColor.gray.cgColor
+        
         let normalColor = AppColor.ypGray
         let selectedColor = AppColor.ypBlue
         UITabBarItem.appearance().setTitleTextAttributes(

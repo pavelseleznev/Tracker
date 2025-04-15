@@ -21,7 +21,7 @@ final class CreateTrackerViewController: UIViewController {
         regularHabitButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         regularHabitButton.titleLabel?.textAlignment = .center
         regularHabitButton.titleLabel?.textColor = AppColor.ypWhite
-        regularHabitButton.tintColor = AppColor.ypWhite
+        regularHabitButton.setTitleColor(AppColor.ypWhite, for: .normal)
         regularHabitButton.backgroundColor = AppColor.ypBlack
         regularHabitButton.translatesAutoresizingMaskIntoConstraints = false
         regularHabitButton.addTarget(self, action: #selector(habitButtonTapped), for: .touchUpInside)
@@ -36,7 +36,7 @@ final class CreateTrackerViewController: UIViewController {
         singleTrackerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         singleTrackerButton.titleLabel?.textAlignment = .center
         singleTrackerButton.titleLabel?.textColor = AppColor.ypWhite
-        singleTrackerButton.tintColor = AppColor.ypWhite
+        singleTrackerButton.setTitleColor(AppColor.ypWhite, for: .normal)
         singleTrackerButton.backgroundColor = AppColor.ypBlack
         singleTrackerButton.translatesAutoresizingMaskIntoConstraints = false
         singleTrackerButton.addTarget(self, action: #selector(singleTrackerButtonTapped), for: .touchUpInside)

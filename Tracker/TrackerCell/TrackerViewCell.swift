@@ -20,14 +20,13 @@ final class TrackerViewCell: UICollectionViewCell {
         let viewCellLabel = UILabel()
         viewCellLabel.font = .systemFont(ofSize: 12, weight: .medium)
         viewCellLabel.numberOfLines = 0
-        viewCellLabel.textColor = AppColor.ypWhite
+        viewCellLabel.textColor = .white
         viewCellLabel.translatesAutoresizingMaskIntoConstraints = false
         return viewCellLabel
     }()
     
     private let viewCellEmoji: UILabel = {
         let viewCellEmoji = UILabel()
-        
         viewCellEmoji.font = .systemFont(ofSize: 16, weight: .medium)
         viewCellEmoji.layer.cornerRadius = 12
         viewCellEmoji.textAlignment = .center

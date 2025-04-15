@@ -20,7 +20,7 @@ final class ScheduleViewController: UIViewController {
         scheduleDoneButton.titleLabel?.textAlignment = .center
         scheduleDoneButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         scheduleDoneButton.backgroundColor = AppColor.ypBlack
-        scheduleDoneButton.tintColor = AppColor.ypWhite
+        scheduleDoneButton.setTitleColor(AppColor.ypWhite, for: .normal)
         scheduleDoneButton.clipsToBounds = true
         scheduleDoneButton.layer.cornerRadius = 16
         scheduleDoneButton.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ final class ScheduleViewController: UIViewController {
         let scheduleView = UITableView()
         scheduleView.register(
             UITableViewCell.self,
-            forCellReuseIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue
         )
         scheduleView.separatorInset = UIEdgeInsets(
             top: 0,
@@ -140,7 +140,7 @@ extension ScheduleViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue,
+            withIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue,
             for: indexPath
         )
         cell.backgroundColor = .ypLightGray.withAlphaComponent(0.3)

@@ -106,12 +106,12 @@ final class TrackersViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
             TrackerViewCell.self,
-            forCellWithReuseIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue
+            forCellWithReuseIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue
         )
         collectionView.register(
             HeaderSectionView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: AccessibilityIdentifier.ReuseIdentifier.rawValue
+            withReuseIdentifier: ReuseIdentifier.ReuseIdentifier.rawValue
         )
         return collectionView
     }()
@@ -121,6 +121,7 @@ final class TrackersViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = AppColor.ypWhite
         
+        trackersCollectionView.backgroundColor = AppColor.ypWhite
         trackersCollectionView.dataSource = self
         trackersCollectionView.delegate = self
         
@@ -287,7 +288,7 @@ extension TrackersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let view = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
-            withReuseIdentifier: AccessibilityIdentifier.ReuseIdentifier.rawValue,
+            withReuseIdentifier: ReuseIdentifier.ReuseIdentifier.rawValue,
             for: indexPath
         ) as? HeaderSectionView else {
             return UICollectionReusableView()
@@ -299,7 +300,7 @@ extension TrackersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: AccessibilityIdentifier.cellReuseIdentifier.rawValue,
+            withReuseIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue,
             for: indexPath
         ) as? TrackerViewCell else {
             return UICollectionViewCell()
@@ -397,9 +398,15 @@ extension TrackersViewController: CreateTrackerViewControllerDelegate {
     private func addTrackerDate(newTracker: TrackerCategory) -> TrackerCategory {
         let tracker = newTracker.trackerCategoryList[0]
         if tracker.trackerSchedule.isEmpty {
-            var tracker = tracker
-            tracker.trackerDate = currentDate
-            return TrackerCategory(trackerCategoryTitle: newTracker.trackerCategoryTitle, trackerCategoryList: [tracker])
+            let updateTracker = Tracker(
+                trackerID: tracker.trackerID,
+                trackerName: tracker.trackerName,
+                trackerColor: tracker.trackerColor,
+                trackerEmoji: tracker.trackerEmoji,
+                trackerSchedule: tracker.trackerSchedule,
+                trackerDate: currentDate)
+            return TrackerCategory(trackerCategoryTitle: newTracker.trackerCategoryTitle,
+                                   trackerCategoryList: [updateTracker])
         }
         else {
             return newTracker
