@@ -255,12 +255,12 @@ final class TrackersViewController: UIViewController {
         updatePlaceholder()
     }
     
-    private func isCompletedTracker(id: UUID) -> Bool {
+    private func isCompletedTracker(for date: Date, id: UUID) -> Bool {
         let currentFetchedDays = try? trackerRecordStore.fetchRequestDays(for: id)
-        guard let currentDate = Date().createDateForTracker() else {
+        guard let currentDate = date.createDateForTracker() else {
             return false
         }
-        return (currentFetchedDays?.contains(currentDate) ?? false) && currentDate <= currentDate
+        return (currentFetchedDays?.contains(currentDate) ?? false) && currentDate <= Date()
     }
     
     @objc private func createNewTracker() {
@@ -315,7 +315,8 @@ extension TrackersViewController: UICollectionViewDataSource {
         let cellData = visibleCategories
         let tracker = cellData[indexPath.section].trackerCategoryList[indexPath.row]
         cell.delegate = self
-        let isCompletedToday = isCompletedTracker(id: tracker.trackerID)
+        let selectedDate = datePicker.date
+        let isCompletedToday = isCompletedTracker(for: selectedDate, id: tracker.trackerID)
         let completedDays = try? trackerRecordStore.fetchRequestDays(for: tracker.trackerID).count
         cell.configure(
             with: tracker,

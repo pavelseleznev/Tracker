@@ -17,6 +17,16 @@ final class ColorCollectionViewCell: UICollectionViewCell {
         return colorCollectionView
     }()
     
+    private let colorCellLayerView: UIView = {
+        let colorCellLayerView = UIView()
+        colorCellLayerView.layer.cornerRadius = 8
+        colorCellLayerView.layer.borderWidth = 3
+        colorCellLayerView.layer.masksToBounds = true
+        colorCellLayerView.translatesAutoresizingMaskIntoConstraints = false
+        colorCellLayerView.isHidden = true
+        return colorCellLayerView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -30,10 +40,16 @@ final class ColorCollectionViewCell: UICollectionViewCell {
     
     func configure(color: UIColor) {
         colorCollectionView.backgroundColor = color
+        colorCellLayerView.layer.borderColor = color.withAlphaComponent(0.3).cgColor
+    }
+    
+    func showColorCellLayerView(isVisible: Bool) {
+        colorCellLayerView.isHidden = !isVisible
     }
     
     private func setupSubviews() {
         contentView.addSubview(colorCollectionView)
+        contentView.addSubview(colorCellLayerView)
         contentView.layer.cornerRadius = 8
         contentView.layer.masksToBounds = true
     }
@@ -43,7 +59,12 @@ final class ColorCollectionViewCell: UICollectionViewCell {
             colorCollectionView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             colorCollectionView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             colorCollectionView.widthAnchor.constraint(equalToConstant: 40),
-            colorCollectionView.heightAnchor.constraint(equalToConstant: 40)
+            colorCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            
+            colorCellLayerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            colorCellLayerView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            colorCellLayerView.widthAnchor.constraint(equalToConstant: 52),
+            colorCellLayerView.heightAnchor.constraint(equalToConstant: 52)
         ])
     }
 }

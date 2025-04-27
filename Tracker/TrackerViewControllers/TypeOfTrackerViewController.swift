@@ -150,6 +150,7 @@ final class TypeOfTrackerViewController: UIViewController {
         return scrollView
     }()
     
+    private var previouslySelectedIndexPath: IndexPath?
     private var isTrackerNameEmpty: Bool = false
     private var categoryTitle: String?
     private var color: UIColor?
@@ -222,9 +223,6 @@ final class TypeOfTrackerViewController: UIViewController {
         
         colorCollectionView.dataSource = self
         colorCollectionView.delegate = self
-        
-        emojiCollectionView.allowsMultipleSelection = false
-        colorCollectionView.allowsMultipleSelection = false
         
         createNavigationBar()
         setupSubviews()
@@ -511,14 +509,20 @@ extension TypeOfTrackerViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if collectionView == emojiCollectionView {
+        if let previousIndexPath = previouslySelectedIndexPath {
+            if let previouslySelectedCell = collectionView.cellForItem(at: previousIndexPath) as? ColorCollectionViewCell {
+                previouslySelectedCell.showColorCellLayerView(isVisible: false)
+            }
+        }
+        
+        if let emojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCollectionViewCell {
             emoji = emojiArray[indexPath.row]
-            cell?.contentView.backgroundColor = .ypLightGray
-        } else {
-            color = colorArray[indexPath.row]
-            cell?.contentView.layer.borderWidth = 3
-            cell?.contentView.layer.borderColor = UIColor.ypGreen.withAlphaComponent(0.3).cgColor
+            emojiCell.contentView.backgroundColor = .ypLightGray
+        }
+        
+        if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell {
+            colorCell.showColorCellLayerView(isVisible: true)
+            previouslySelectedIndexPath = indexPath
         }
     }
     
@@ -526,10 +530,6 @@ extension TypeOfTrackerViewController: UICollectionViewDelegateFlowLayout {
         let cell = collectionView.cellForItem(at: indexPath)
         if collectionView == emojiCollectionView {
             cell?.contentView.backgroundColor = .ypWhite
-        } else {
-            color = colorArray[indexPath.row]
-            cell?.contentView.layer.borderWidth = 0
-            cell?.contentView.layer.borderColor = UIColor.ypGreen.withAlphaComponent(0.3).cgColor
         }
     }
 }

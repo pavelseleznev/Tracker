@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct AppColor {
+enum AppColor {
     static let ypLightGray = UIColor(named: "ypLightGray")
     static let ypGreen = UIColor(named: "ypGreen")
     static let ypBlack = UIColor(named: "ypBlack")
