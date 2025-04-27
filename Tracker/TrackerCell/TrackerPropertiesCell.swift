@@ -9,7 +9,11 @@ import UIKit
 
 final class TrackerPropertiesCell: UITableViewCell {
     
-    private let categoryAndScheduleLabels: UILabel = {
+    weak var delegate: TrackerPropertiesCellDelegate?
+    private var indexPath: IndexPath?
+    private let properties = ["Категория", "Расписание"]
+    
+    private lazy var categoryAndScheduleLabels: UILabel = {
         let propertiesTitleLabel = UILabel()
         propertiesTitleLabel.font = .systemFont(ofSize: 17, weight: .regular)
         propertiesTitleLabel.textColor = AppColor.ypBlack
@@ -17,7 +21,7 @@ final class TrackerPropertiesCell: UITableViewCell {
         return propertiesTitleLabel
     }()
     
-    private let selectedScheduleDays: UILabel = {
+    private lazy var selectedScheduleDays: UILabel = {
         let detailsLabel = UILabel()
         detailsLabel.font = .systemFont(ofSize: 17, weight: .regular)
         detailsLabel.textColor = AppColor.ypGray
@@ -25,7 +29,7 @@ final class TrackerPropertiesCell: UITableViewCell {
         return detailsLabel
     }()
     
-    private let stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 2
@@ -41,10 +45,6 @@ final class TrackerPropertiesCell: UITableViewCell {
         return nextButton
     }()
     
-    private let properties = ["Категория", "Расписание"]
-    private var indexPath: IndexPath?
-    weak var delegate: TrackerPropertiesCellDelegate?
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -54,6 +54,16 @@ final class TrackerPropertiesCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(indexPath: IndexPath) {
+        self.indexPath = indexPath
+        categoryAndScheduleLabels.text = properties[indexPath.row]
+    }
+    
+    func setup(detailsText: String?) {
+        selectedScheduleDays.text = detailsText
+        selectedScheduleDays.isHidden = detailsText == nil
     }
     
     private func setupSubviews() {
@@ -75,16 +85,6 @@ final class TrackerPropertiesCell: UITableViewCell {
             detailsButton.widthAnchor.constraint(equalToConstant: 46),
             detailsButton.heightAnchor.constraint(equalToConstant: 46)
         ])
-    }
-    
-    func configure(indexPath: IndexPath) {
-        self.indexPath = indexPath
-        categoryAndScheduleLabels.text = properties[indexPath.row]
-    }
-    
-    func setup(detailsText: String?) {
-        selectedScheduleDays.text = detailsText
-        selectedScheduleDays.isHidden = detailsText == nil
     }
     
     @objc private func trackerDetailsButtonTapped(_ sender: UIButton) {

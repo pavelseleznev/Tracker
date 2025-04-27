@@ -100,7 +100,7 @@ final class CreateTrackerViewController: UIViewController {
 // MARK: - CreateTrackerViewController TypeOfTrackerViewControllerDelegate
 extension CreateTrackerViewController: TypeOfTrackerViewControllerDelegate {
     func addNewTracker(newTracker: TrackerCategory) {
-        delegate?.trackerCategoryList(newTracker: newTracker)
+        delegate?.addNewTrackers(newTracker: newTracker)
         if let navigationController = self.navigationController {
             navigationController.dismiss(animated: true, completion: nil)
             dismiss(animated: true, completion: nil)
@@ -109,5 +109,5 @@ extension CreateTrackerViewController: TypeOfTrackerViewControllerDelegate {
 }
 
 protocol CreateTrackerViewControllerDelegate: AnyObject {
-    func trackerCategoryList(newTracker: TrackerCategory)
+    func addNewTrackers(newTracker: TrackerCategory)
 }
