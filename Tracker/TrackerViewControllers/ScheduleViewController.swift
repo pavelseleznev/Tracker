@@ -32,7 +32,7 @@ final class ScheduleViewController: UIViewController {
         let scheduleView = UITableView()
         scheduleView.register(
             UITableViewCell.self,
-            forCellReuseIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.Cell.rawValue
         )
         scheduleView.separatorInset = UIEdgeInsets(
             top: 0,
@@ -52,9 +52,9 @@ final class ScheduleViewController: UIViewController {
         return scheduleView
     }()
     
-    private let weekdays: [Weekdays] = Weekdays.allCases
     private var switches = [UISwitch]()
     private var selectedWeekdays: [Weekdays] = []
+    private let weekdays: [Weekdays] = Weekdays.allCases
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -140,7 +140,7 @@ extension ScheduleViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: ReuseIdentifier.CellReuseIdentifier.rawValue,
+            withIdentifier: ReuseIdentifier.Cell.rawValue,
             for: indexPath
         )
         cell.backgroundColor = .ypLightGray.withAlphaComponent(0.3)

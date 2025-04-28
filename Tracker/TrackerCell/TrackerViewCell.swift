@@ -9,14 +9,20 @@ import UIKit
 
 final class TrackerViewCell: UICollectionViewCell {
     
-    private let trackerViewCell: UIView = {
+    weak var delegate: TrackerCellDelegate?
+    private var isCompletedToday: Bool = false
+    private var trackerID: UUID?
+    private var indexPath: IndexPath?
+    private let doneImage = UIImage(named: "DoneImage")
+    
+    private lazy var trackerViewCell: UIView = {
         let trackerViewCell = UIView()
         trackerViewCell.layer.cornerRadius = 16
         trackerViewCell.translatesAutoresizingMaskIntoConstraints = false
         return trackerViewCell
     }()
     
-    private let viewCellLabel: UILabel = {
+    private lazy var viewCellLabel: UILabel = {
         let viewCellLabel = UILabel()
         viewCellLabel.font = .systemFont(ofSize: 12, weight: .medium)
         viewCellLabel.numberOfLines = 0
@@ -25,7 +31,7 @@ final class TrackerViewCell: UICollectionViewCell {
         return viewCellLabel
     }()
     
-    private let viewCellEmoji: UILabel = {
+    private lazy var viewCellEmoji: UILabel = {
         let viewCellEmoji = UILabel()
         viewCellEmoji.font = .systemFont(ofSize: 16, weight: .medium)
         viewCellEmoji.layer.cornerRadius = 12
@@ -49,13 +55,13 @@ final class TrackerViewCell: UICollectionViewCell {
         return viewCellPlusButton
     }()
     
-    private let viewCellPlusImage: UIImage = {
+    private lazy var viewCellPlusImage: UIImage = {
         let pointSize = UIImage.SymbolConfiguration(pointSize: 11)
         let image = UIImage(systemName: "plus", withConfiguration: pointSize)
         return image ?? UIImage()
     }()
     
-    private let viewCellDayCounter: UILabel = {
+    private lazy var viewCellDayCounter: UILabel = {
         let viewCellDayCounter = UILabel()
         viewCellDayCounter.textColor = AppColor.ypBlack
         viewCellDayCounter.text = "0 дней"
@@ -64,12 +70,6 @@ final class TrackerViewCell: UICollectionViewCell {
         viewCellDayCounter.translatesAutoresizingMaskIntoConstraints = false
         return viewCellDayCounter
     }()
-    
-    private let doneImage = UIImage(named: "DoneImage")
-    private var isCompletedToday: Bool = false
-    private var trackerID: UUID?
-    private var indexPath: IndexPath?
-    weak var delegate: TrackerCellDelegate?
     
     func configure(with tracker: Tracker, isCompletedToday: Bool, completedDays: Int, indexPath: IndexPath) {
         self.trackerID = tracker.trackerID
@@ -140,10 +140,10 @@ final class TrackerViewCell: UICollectionViewCell {
             assertionFailure("[plusButtonTapped]: Error trackerID not found")
             return
         }
-        delegate?.completeTracker(id: trackerID, at: indexPath)
+        delegate?.completeTracker(trackerID: trackerID, at: indexPath)
     }
 }
 
 protocol TrackerCellDelegate: AnyObject {
-    func completeTracker(id: UUID, at indexPath: IndexPath)
+    func completeTracker(trackerID: UUID, at indexPath: IndexPath)
 }
