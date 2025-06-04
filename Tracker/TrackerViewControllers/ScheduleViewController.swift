@@ -168,7 +168,3 @@ extension ScheduleViewController: UITableViewDelegate {
         CGFloat(75)
     }
 }
-
-protocol ScheduleViewControllerDelegate: AnyObject {
-    func didSelectWeekdays(_ weekdays: [Weekdays])
-}

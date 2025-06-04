@@ -12,4 +12,8 @@ enum ReuseIdentifier: String {
     case Header = "header"
     case EmojiCell = "emojiCell"
     case ColorCell = "colorCell"
+    case CategoryCell = "categoryCell"
+    case SelectedCategory = "selectedCategoryCell"
+    case TrackerCategoryTitle = "trackerCategoryTitle"
+    case HasLaunchedBefore = "hasLaunchedBefore"
 }

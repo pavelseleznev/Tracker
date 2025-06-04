@@ -14,28 +14,28 @@ final class TypeOfTrackerViewController: UIViewController {
     weak var delegate: TypeOfTrackerViewControllerDelegate?
     
     // MARK: - Private Properties
-    private lazy var trackerNameInput: UITextField = {
-        let trackerNameInput = UITextField()
-        trackerNameInput.font = .systemFont(ofSize: 17, weight: .regular)
-        trackerNameInput.leftView = UIView(
+    private lazy var trackerNameField: UITextField = {
+        let trackerNameField = UITextField()
+        trackerNameField.font = .systemFont(ofSize: 17, weight: .regular)
+        trackerNameField.leftView = UIView(
             frame: CGRect(
                 x: 0,
                 y: 0,
                 width: 10,
-                height: trackerNameInput.frame.height
+                height: trackerNameField.frame.height
             )
         )
-        trackerNameInput.placeholder = "Введите название трекера"
-        trackerNameInput.leftViewMode = .always
-        trackerNameInput.clearButtonMode = .whileEditing
-        trackerNameInput.layer.cornerRadius = 16
-        trackerNameInput.backgroundColor = .ypLightGray.withAlphaComponent(0.3)
-        trackerNameInput.textColor = AppColor.ypBlack
-        trackerNameInput.tintColor = AppColor.ypBlack
-        trackerNameInput.clipsToBounds = true
-        trackerNameInput.delegate = self
-        trackerNameInput.translatesAutoresizingMaskIntoConstraints = false
-        return trackerNameInput
+        trackerNameField.placeholder = "Введите название трекера"
+        trackerNameField.leftViewMode = .always
+        trackerNameField.clearButtonMode = .whileEditing
+        trackerNameField.layer.cornerRadius = 16
+        trackerNameField.backgroundColor = .ypLightGray.withAlphaComponent(0.3)
+        trackerNameField.textColor = AppColor.ypBlack
+        trackerNameField.tintColor = AppColor.ypBlack
+        trackerNameField.clipsToBounds = true
+        trackerNameField.delegate = self
+        trackerNameField.translatesAutoresizingMaskIntoConstraints = false
+        return trackerNameField
     }()
     
     private lazy var nameFieldCharacterLimitLabel: UILabel = {
@@ -67,12 +67,12 @@ final class TypeOfTrackerViewController: UIViewController {
     private lazy var cancelButton: UIButton = {
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle("Отменить", for: .normal)
-        cancelButton.clipsToBounds = true
         cancelButton.tintColor = AppColor.ypRed
         cancelButton.backgroundColor = AppColor.ypWhite
         cancelButton.layer.borderColor = UIColor.ypRed.cgColor
         cancelButton.layer.borderWidth = 1
         cancelButton.layer.cornerRadius = 16
+        cancelButton.clipsToBounds = true
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return cancelButton
@@ -152,7 +152,7 @@ final class TypeOfTrackerViewController: UIViewController {
     
     private var previouslySelectedIndexPath: IndexPath?
     private var isTrackerNameEmpty: Bool = false
-    private var categoryTitle: String?
+    private var categoryTitle = ""
     private var color: UIColor?
     private var emoji: String?
     private var schedule: [Weekdays?] = []
@@ -213,6 +213,11 @@ final class TypeOfTrackerViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAppLifecycle()
+    }
+    
+    // MARK: - Private Methods
+    private func setupAppLifecycle() {
         view.backgroundColor = AppColor.ypWhite
         
         trackerProperties.dataSource = self
@@ -230,7 +235,6 @@ final class TypeOfTrackerViewController: UIViewController {
         tapToHideKeyboard()
     }
     
-    // MARK: - Private Methods
     private func createNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         navigationBar.topItem?.title = typeOfTracker ? "Новое нерегулярное событие" : "Новая привычка"
@@ -245,7 +249,7 @@ final class TypeOfTrackerViewController: UIViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(trackerNameInput)
+        contentView.addSubview(trackerNameField)
         contentView.addSubview(nameFieldCharacterLimitLabel)
         contentView.addSubview(createTrackerButton)
         contentView.addSubview(cancelButton)
@@ -258,14 +262,14 @@ final class TypeOfTrackerViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            trackerNameInput.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
-            trackerNameInput.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            trackerNameInput.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            trackerNameInput.heightAnchor.constraint(equalToConstant: 75),
+            trackerNameField.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 16),
+            trackerNameField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            trackerNameField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            trackerNameField.heightAnchor.constraint(equalToConstant: 75),
             
-            nameFieldCharacterLimitLabel.topAnchor.constraint(equalTo: trackerNameInput.bottomAnchor),
-            nameFieldCharacterLimitLabel.leadingAnchor.constraint(equalTo: trackerNameInput.leadingAnchor, constant: 28),
-            nameFieldCharacterLimitLabel.trailingAnchor.constraint(equalTo: trackerNameInput.trailingAnchor, constant: -28),
+            nameFieldCharacterLimitLabel.topAnchor.constraint(equalTo: trackerNameField.bottomAnchor),
+            nameFieldCharacterLimitLabel.leadingAnchor.constraint(equalTo: trackerNameField.leadingAnchor, constant: 28),
+            nameFieldCharacterLimitLabel.trailingAnchor.constraint(equalTo: trackerNameField.trailingAnchor, constant: -28),
             nameFieldCharacterLimitLabel.heightAnchor.constraint(equalToConstant: 22),
             
             createTrackerButton.topAnchor.constraint(equalTo: colorCollectionView.bottomAnchor, constant: 16),
@@ -320,9 +324,9 @@ final class TypeOfTrackerViewController: UIViewController {
     private func checkNameFieldAndScheduleFilled() {
         var allFullFill = false
         if typeOfTracker == false {
-            allFullFill = !schedule.isEmpty && isTrackerNameEmpty
+            allFullFill = isTrackerNameEmpty && !categoryTitle.isEmpty && !schedule.isEmpty && (emoji != nil) && (color != nil)
         } else {
-            allFullFill = isTrackerNameEmpty
+            allFullFill = isTrackerNameEmpty && !categoryTitle.isEmpty && (emoji != nil) && (color != nil)
         }
         createTrackerButton.isEnabled = allFullFill
         createTrackerButton.backgroundColor = allFullFill ? AppColor.ypBlack : AppColor.ypGray
@@ -335,13 +339,13 @@ final class TypeOfTrackerViewController: UIViewController {
     @objc private func createButtonTapped() {
         let newTracker = Tracker(
             trackerID: UUID(),
-            trackerName: trackerNameInput.text ?? "",
-            trackerColor: self.color ?? .colorSelection17,
+            trackerName: trackerNameField.text ?? "",
+            trackerColor: colorSelection.first(where: { $0.value == self.color })?.key ?? "Color selection 17",
             trackerEmoji: self.emoji ?? "❤️",
             trackerSchedule: self.schedule,
             trackerDate: Date())
         let category = TrackerCategory(
-            trackerCategoryTitle: self.categoryTitle ?? "Домашний уют",
+            trackerCategoryTitle: self.categoryTitle,
             trackerCategoryList: [newTracker])
         delegate?.addNewTracker(newTracker: category)
         dismiss(animated: true, completion: nil)
@@ -376,6 +380,8 @@ extension TypeOfTrackerViewController: UITableViewDataSource {
                 detailsText = shortDayNames.joined(separator: ", ")
             }
             cell.setup(detailsText: detailsText)
+        } else {
+            cell.setup(detailsText: categoryTitle)
         }
         cell.delegate = self
         return cell
@@ -403,7 +409,22 @@ extension TypeOfTrackerViewController: TrackerPropertiesCellDelegate {
             scheduleViewController.initialSelectedWeekdays = schedule
             let navigationViewController = UINavigationController(rootViewController: scheduleViewController)
             present(navigationViewController, animated: true)
+        } else {
+            let listOfCategoriesViewController = ListOfCategoriesViewController()
+            listOfCategoriesViewController.selectedCategory = categoryTitle
+            listOfCategoriesViewController.delegate = self
+            let navigationViewController = UINavigationController(rootViewController: listOfCategoriesViewController)
+            present(navigationViewController, animated: true)
         }
+    }
+}
+
+// MARK: - TypeOfTrackerViewController ListOfCategoriesDelegate
+extension TypeOfTrackerViewController: ListOfCategoriesDelegate {
+    func didSelectCategory(_ category: String) {
+        categoryTitle = category
+        trackerProperties.reloadData()
+        checkNameFieldAndScheduleFilled()
     }
 }
 
@@ -430,6 +451,14 @@ extension TypeOfTrackerViewController: UITextFieldDelegate {
         let maxLength = 38
         nameFieldCharacterLimitLabel.isHidden = newText.count < maxLength
         return newText.count <= maxLength
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let newText = textField.text else {
+            return
+        }
+        isTrackerNameEmpty = !newText.isEmpty
+        checkNameFieldAndScheduleFilled()
     }
 }
 
@@ -509,31 +538,31 @@ extension TypeOfTrackerViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
         if let previousIndexPath = previouslySelectedIndexPath {
             if let previouslySelectedCell = collectionView.cellForItem(at: previousIndexPath) as? ColorCollectionViewCell {
                 previouslySelectedCell.showColorCellLayerView(isVisible: false)
             }
         }
-        
-        if let emojiCell = collectionView.cellForItem(at: indexPath) as? EmojiCollectionViewCell {
+        if collectionView == emojiCollectionView {
             emoji = emojiArray[indexPath.row]
-            emojiCell.contentView.backgroundColor = .ypLightGray
-        }
-        
-        if let colorCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell {
+            cell?.contentView.backgroundColor = AppColor.ypLightGray
+        } else if let colorCell = cell as? ColorCollectionViewCell {
+            color = colorArray[indexPath.row]
             colorCell.showColorCellLayerView(isVisible: true)
             previouslySelectedIndexPath = indexPath
         }
+        checkNameFieldAndScheduleFilled()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         if collectionView == emojiCollectionView {
-            cell?.contentView.backgroundColor = .ypWhite
+            cell?.contentView.backgroundColor = AppColor.ypWhite
+        } else {
+            color = colorArray[indexPath.row]
+            cell?.contentView.layer.borderWidth = 0
+            cell?.contentView.layer.borderColor = UIColor.ypGreen.withAlphaComponent(0.3).cgColor
         }
     }
-}
-
-protocol TypeOfTrackerViewControllerDelegate: AnyObject {
-    func addNewTracker(newTracker: TrackerCategory)
 }

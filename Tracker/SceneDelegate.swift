@@ -16,7 +16,24 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = TabBarController()
+        
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: ReuseIdentifier.HasLaunchedBefore.rawValue)
+        
+        if isFirstLaunch {
+            UserDefaults.standard.set(true, forKey: ReuseIdentifier.HasLaunchedBefore.rawValue)
+            
+            let onboardingViewController = OnboardingViewController(
+                transitionStyle: .scroll,
+                navigationOrientation: .horizontal,
+                options: nil)
+            window?.rootViewController = onboardingViewController
+            window?.makeKeyAndVisible()
+        } else {
+            let tabBarController = TabBarController()
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
+        }
+        
         window?.makeKeyAndVisible()
     }
     
