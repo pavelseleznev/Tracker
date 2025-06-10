@@ -22,7 +22,7 @@ final class ListOfCategoriesViewController: UIViewController {
         let categoriesTableView = UITableView()
         categoriesTableView.register(
             UITableViewCell.self,
-            forCellReuseIdentifier: ReuseIdentifier.CategoryCell.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.categoryCell.rawValue
         )
         categoriesTableView.separatorStyle = .none
         categoriesTableView.layer.cornerRadius = 16
@@ -75,7 +75,7 @@ final class ListOfCategoriesViewController: UIViewController {
         
         view.backgroundColor = AppColor.ypWhite
         trackerCategoryTitle = UserDefaults.standard.array(
-            forKey: ReuseIdentifier.TrackerCategoryTitle.rawValue
+            forKey: ReuseIdentifier.trackerCategoryTitle.rawValue
         ) as? [String] ?? []
         categoriesTableView.dataSource = self
         categoriesTableView.delegate = self
@@ -89,7 +89,7 @@ final class ListOfCategoriesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let savedCategory = UserDefaults.standard.string(forKey: ReuseIdentifier.SelectedCategory.rawValue) {
+        if let savedCategory = UserDefaults.standard.string(forKey: ReuseIdentifier.selectedCategory.rawValue) {
             selectedCategory = savedCategory
             
             guard let selectedCategory = selectedCategory else { return }
@@ -193,7 +193,7 @@ extension ListOfCategoriesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let categoryCell = tableView.dequeueReusableCell(
-            withIdentifier: ReuseIdentifier.CategoryCell.rawValue,
+            withIdentifier: ReuseIdentifier.categoryCell.rawValue,
             for: indexPath
         )
         
@@ -208,7 +208,7 @@ extension ListOfCategoriesViewController: UITableViewDataSource {
         
         categoryCell.viewWithTag(0)?.removeFromSuperview()
         
-        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.TrackerCategoryTitle.rawValue)
+        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.trackerCategoryTitle.rawValue)
         
         if indexPath.row != trackerCategoryTitle.count - 1 {
             addSeparatorLineBetweenCells(cell: categoryCell)
@@ -221,7 +221,7 @@ extension ListOfCategoriesViewController: UITableViewDataSource {
 // MARK: - ListOfCategoriesViewController UITableViewDelegate
 extension ListOfCategoriesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(75)
+        CGFloat(75)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -235,7 +235,7 @@ extension ListOfCategoriesViewController: UITableViewDelegate {
         selectedIndexPath = indexPath
         selectedCategory = trackerCategoryTitle[indexPath.row]
         
-        UserDefaults.standard.set(selectedCategory, forKey: ReuseIdentifier.SelectedCategory.rawValue)
+        UserDefaults.standard.set(selectedCategory, forKey: ReuseIdentifier.selectedCategory.rawValue)
         
         if let selectedCategory = selectedCategory {
             delegate?.didSelectCategory(selectedCategory)
@@ -266,7 +266,7 @@ extension ListOfCategoriesViewController: UITableViewDelegate {
                 alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Удалить", style: .destructive, handler: { _ in
                     self.trackerCategoryTitle.remove(at: indexPath.row)
-                    UserDefaults.standard.set(self.trackerCategoryTitle, forKey: ReuseIdentifier.TrackerCategoryTitle.rawValue)
+                    UserDefaults.standard.set(self.trackerCategoryTitle, forKey: ReuseIdentifier.trackerCategoryTitle.rawValue)
                     
                     if let selectedIndexPath = self.selectedIndexPath, selectedIndexPath == indexPath {
                         self.selectedIndexPath = nil
@@ -291,7 +291,7 @@ extension ListOfCategoriesViewController: UITableViewDelegate {
 extension ListOfCategoriesViewController: CreateCategoryViewControllerDelegate {
     func addNewCategory(newCategory: String) {
         trackerCategoryTitle.append(newCategory)
-        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.TrackerCategoryTitle.rawValue)
+        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.trackerCategoryTitle.rawValue)
         updatePlaceholder()
         updateTableView()
     }
@@ -302,7 +302,7 @@ extension ListOfCategoriesViewController: EditingCategoryViewControllerDelegate 
     func didUpdateCategory(at index: Int, with newCategory: String) {
         trackerCategoryTitle[index] = newCategory
         
-        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.TrackerCategoryTitle.rawValue)
+        UserDefaults.standard.set(trackerCategoryTitle, forKey: ReuseIdentifier.trackerCategoryTitle.rawValue)
         
         categoriesTableView.reloadData()
     }

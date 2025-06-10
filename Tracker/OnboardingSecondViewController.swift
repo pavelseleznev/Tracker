@@ -15,7 +15,7 @@ final class OnboardingSecondViewController: UIViewController {
     private lazy var onboardingRedImageView: UIImageView = {
         let onboardingRedImageView = UIImageView()
         onboardingRedImageView.contentMode  = .scaleAspectFill
-        onboardingRedImageView.image = UIImage(named: "OnboardingRed")
+        onboardingRedImageView.image = UIImage(resource: .onboardingRed)
         onboardingRedImageView.translatesAutoresizingMaskIntoConstraints = false
         return onboardingRedImageView
     }()

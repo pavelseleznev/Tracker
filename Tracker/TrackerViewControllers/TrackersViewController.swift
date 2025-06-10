@@ -114,12 +114,12 @@ final class TrackersViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
             TrackerViewCell.self,
-            forCellWithReuseIdentifier: ReuseIdentifier.Cell.rawValue
+            forCellWithReuseIdentifier: ReuseIdentifier.cell.rawValue
         )
         collectionView.register(
             HeaderSectionView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: ReuseIdentifier.Header.rawValue
+            withReuseIdentifier: ReuseIdentifier.header.rawValue
         )
         return collectionView
     }()
@@ -281,7 +281,7 @@ extension TrackersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let view = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
-            withReuseIdentifier: ReuseIdentifier.Header.rawValue,
+            withReuseIdentifier: ReuseIdentifier.header.rawValue,
             for: indexPath
         ) as? HeaderSectionView else {
             return UICollectionReusableView()
@@ -293,7 +293,7 @@ extension TrackersViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ReuseIdentifier.Cell.rawValue,
+            withReuseIdentifier: ReuseIdentifier.cell.rawValue,
             for: indexPath
         ) as? TrackerViewCell else {
             return UICollectionViewCell()

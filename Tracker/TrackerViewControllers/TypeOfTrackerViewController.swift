@@ -82,7 +82,7 @@ final class TypeOfTrackerViewController: UIViewController {
         let trackerPropertiesTableView = UITableView()
         trackerPropertiesTableView.register(
             TrackerPropertiesCell.self,
-            forCellReuseIdentifier: ReuseIdentifier.Cell.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.cell.rawValue
         )
         trackerPropertiesTableView.separatorInset = UIEdgeInsets(
             top: 0,
@@ -114,7 +114,7 @@ final class TypeOfTrackerViewController: UIViewController {
     private lazy var emojiCollectionView: UICollectionView = {
         let emojiCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         emojiCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        emojiCollectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: ReuseIdentifier.EmojiCell.rawValue)
+        emojiCollectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: ReuseIdentifier.emojiCell.rawValue)
         emojiCollectionView.isScrollEnabled = false
         return emojiCollectionView
     }()
@@ -131,7 +131,7 @@ final class TypeOfTrackerViewController: UIViewController {
     private lazy var colorCollectionView: UICollectionView = {
         let colorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         colorCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        colorCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: ReuseIdentifier.ColorCell.rawValue)
+        colorCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: ReuseIdentifier.colorCell.rawValue)
         colorCollectionView.isScrollEnabled = false
         return colorCollectionView
     }()
@@ -340,7 +340,7 @@ final class TypeOfTrackerViewController: UIViewController {
         let newTracker = Tracker(
             trackerID: UUID(),
             trackerName: trackerNameField.text ?? "",
-            trackerColor: colorSelection.first(where: { $0.value == self.color })?.key ?? "Color selection 17",
+            trackerColor: AppColor.colorSelection.first(where: { $0.value == self.color })?.key ?? "Color selection 17",
             trackerEmoji: self.emoji ?? "❤️",
             trackerSchedule: self.schedule,
             trackerDate: Date())
@@ -360,7 +360,7 @@ extension TypeOfTrackerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ReuseIdentifier.Cell.rawValue,
+            withIdentifier: ReuseIdentifier.cell.rawValue,
             for: indexPath
         ) as? TrackerPropertiesCell else {
             return UITableViewCell()
@@ -481,7 +481,7 @@ extension TypeOfTrackerViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == emojiCollectionView {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ReuseIdentifier.EmojiCell.rawValue,
+                withReuseIdentifier: ReuseIdentifier.emojiCell.rawValue,
                 for: indexPath
             ) as? EmojiCollectionViewCell else {
                 return UICollectionViewCell()
@@ -491,7 +491,7 @@ extension TypeOfTrackerViewController: UICollectionViewDataSource {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ReuseIdentifier.ColorCell.rawValue,
+                withReuseIdentifier: ReuseIdentifier.colorCell.rawValue,
                 for: indexPath
             ) as? ColorCollectionViewCell else {
                 return UICollectionViewCell()

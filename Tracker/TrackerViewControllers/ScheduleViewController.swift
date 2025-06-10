@@ -32,7 +32,7 @@ final class ScheduleViewController: UIViewController {
         let scheduleView = UITableView()
         scheduleView.register(
             UITableViewCell.self,
-            forCellReuseIdentifier: ReuseIdentifier.Cell.rawValue
+            forCellReuseIdentifier: ReuseIdentifier.cell.rawValue
         )
         scheduleView.separatorInset = UIEdgeInsets(
             top: 0,
@@ -140,7 +140,7 @@ extension ScheduleViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: ReuseIdentifier.Cell.rawValue,
+            withIdentifier: ReuseIdentifier.cell.rawValue,
             for: indexPath
         )
         cell.backgroundColor = .ypLightGray.withAlphaComponent(0.3)

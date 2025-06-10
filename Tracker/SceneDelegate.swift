@@ -17,21 +17,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let isFirstLaunch = !UserDefaults.standard.bool(forKey: ReuseIdentifier.HasLaunchedBefore.rawValue)
+        let isFirstLaunch = !UserDefaultsService.shared.hasLaunchedBefore
         
         if isFirstLaunch {
-            UserDefaults.standard.set(true, forKey: ReuseIdentifier.HasLaunchedBefore.rawValue)
+            UserDefaultsService.shared.hasLaunchedBefore = true
             
             let onboardingViewController = OnboardingViewController(
                 transitionStyle: .scroll,
                 navigationOrientation: .horizontal,
                 options: nil)
             window?.rootViewController = onboardingViewController
-            window?.makeKeyAndVisible()
         } else {
             let tabBarController = TabBarController()
             window?.rootViewController = tabBarController
-            window?.makeKeyAndVisible()
         }
         
         window?.makeKeyAndVisible()

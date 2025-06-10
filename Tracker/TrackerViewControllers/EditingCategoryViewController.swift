@@ -87,8 +87,11 @@ final class EditingCategoryViewController: UIViewController {
     }
     
     @objc private func saveEditingCategoryButtonTapped() {
-        guard let newCategory = categoryNameField.text, !newCategory.isEmpty else { return }
-        guard let editingIndex = editingIndex else { return }
+        guard let newCategory = categoryNameField.text,
+              !newCategory.isEmpty,
+              let editingIndex = editingIndex else {
+            return
+        }
         
         delegate?.didUpdateCategory(at: editingIndex, with: newCategory)
         dismiss(animated: true, completion: nil)

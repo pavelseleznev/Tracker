@@ -46,9 +46,12 @@ final class OnboardingViewController: UIPageViewController {
     
     // MARK: - Internal Method
     func continueButtonTapped() {
-        UserDefaults.standard.set(true, forKey: ReuseIdentifier.HasLaunchedBefore.rawValue)
-        UIApplication.shared.windows.first?.rootViewController = TabBarController()
-        UIApplication.shared.windows.first?.makeKeyAndVisible()
+        UserDefaultsService.shared.hasLaunchedBefore = true
+        
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = TabBarController()
+            window.makeKeyAndVisible()
+        }
     }
 }
 
