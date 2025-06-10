@@ -72,4 +72,13 @@ enum Weekdays: String, CaseIterable, Codable {
             return 7
         }
     }
+    
+    static func convertWeekDay(_ number: Int) -> String {
+        if let weekday = Weekdays.allCases.first(where: {
+            $0.numberValue == number }) {
+            return weekday.rawValue
+        } else {
+            return "[convertWeekDay]: Failed to return weekday string"
+        }
+    }
 }

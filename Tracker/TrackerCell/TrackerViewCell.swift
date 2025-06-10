@@ -76,8 +76,8 @@ final class TrackerViewCell: UICollectionViewCell {
         self.isCompletedToday = isCompletedToday
         self.indexPath = indexPath
         
-        trackerViewCell.backgroundColor = tracker.trackerColor
-        viewCellPlusButton.backgroundColor = tracker.trackerColor
+        trackerViewCell.backgroundColor = UIColor(named: tracker.trackerColor)
+        viewCellPlusButton.backgroundColor = UIColor(named: tracker.trackerColor)
         
         viewCellLabel.text = tracker.trackerName
         viewCellEmoji.text = tracker.trackerEmoji
@@ -142,8 +142,4 @@ final class TrackerViewCell: UICollectionViewCell {
         }
         delegate?.completeTracker(trackerID: trackerID, at: indexPath)
     }
-}
-
-protocol TrackerCellDelegate: AnyObject {
-    func completeTracker(trackerID: UUID, at indexPath: IndexPath)
 }

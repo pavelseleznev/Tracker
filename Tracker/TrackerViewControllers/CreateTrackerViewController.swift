@@ -30,7 +30,7 @@ final class CreateTrackerViewController: UIViewController {
     
     private lazy var singleTrackerButton: UIButton = {
         let singleTrackerButton = UIButton()
-        singleTrackerButton.setTitle("Нерегулярные событие", for: .normal)
+        singleTrackerButton.setTitle("Нерегулярное событие", for: .normal)
         singleTrackerButton.clipsToBounds = true
         singleTrackerButton.layer.cornerRadius = 16
         singleTrackerButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -106,8 +106,4 @@ extension CreateTrackerViewController: TypeOfTrackerViewControllerDelegate {
             dismiss(animated: true, completion: nil)
         }
     }
-}
-
-protocol CreateTrackerViewControllerDelegate: AnyObject {
-    func addNewTrackers(newTracker: TrackerCategory)
 }

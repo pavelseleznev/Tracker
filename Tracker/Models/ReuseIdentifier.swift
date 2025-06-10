@@ -8,8 +8,11 @@
 import Foundation
 
 enum ReuseIdentifier: String {
-    case Cell = "cell"
-    case Header = "header"
-    case EmojiCell = "emojiCell"
-    case ColorCell = "colorCell"
+    case cell
+    case header
+    case emojiCell
+    case colorCell
+    case categoryCell
+    case selectedCategory
+    case trackerCategoryTitle
 }
