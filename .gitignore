@@ -1,0 +1,9 @@
+# Ignore Pods folder
+Pods/
+
+# Ignore Tracker.xcworkspace
+Tracker.xcworkspace
+
+
+
+

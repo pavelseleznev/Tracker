@@ -9,6 +9,7 @@ import UIKit
 
 final class EmojiCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
     private let emojiCollectionCellLabel: UILabel = {
         let emojiCellLabel = UILabel()
         emojiCellLabel.font = .systemFont(ofSize: 32, weight: .bold)
@@ -28,6 +29,7 @@ final class EmojiCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Methods
     func configure(emoji: String) {
         emojiCollectionCellLabel.text = emoji
     }
