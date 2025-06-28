@@ -18,9 +18,11 @@ final class FiltersCell: UITableViewCell {
     }()
     
     private let checkmarkImage: UIImageView = {
-        let checkmarkImage = UIImageView(image: UIImage(named: "DoneImage")?.withRenderingMode(.alwaysOriginal))
-        checkmarkImage.isHidden = true
-        return checkmarkImage
+        let imageView = UIImageView()
+        let checkmarkImage = UIImage(resource: .done).withRenderingMode(.alwaysOriginal)
+        imageView.image = checkmarkImage
+        imageView.isHidden = true
+        return imageView
     }()
     
     private let separatorImage: UIImageView = {

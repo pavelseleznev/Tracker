@@ -342,8 +342,7 @@ final class TrackersViewController: UIViewController {
             message: NSLocalizedString("delete.confirmation", comment: "Delete confirmation"), preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(
             title: NSLocalizedString("delete", comment: "Delete action"), style: .destructive) { [weak self] _ in
-                guard let self else { return }
-                guard let currentDate = currentDate else { return }
+                guard let self, let currentDate = currentDate else { return }
                 self.viewModel?.deleteTracker(selectedTracker)
                 self.checkTrackerStoreIsEmpty()
                 self.updateCurrentTrackers(text: "", date: currentDate)
@@ -502,7 +501,7 @@ extension TrackersViewController: UICollectionViewDelegateFlowLayout {
             return UIMenu(title: "", children: [pinAction, editAction, deleteAction])
         })
     }
-
+    
     func collectionView(
         _ collectionView: UICollectionView,
         contextMenuConfiguration configuration: UIContextMenuConfiguration,

@@ -108,7 +108,7 @@ extension FiltersViewController: UITableViewDelegate {
             self.selectedFilter = filtersArray[indexPath.row]
             let checkmarkImageView = UIImageView(image: UIImage(named: "DoneImage"))
             tableView.cellForRow(at: indexPath)?.accessoryView = checkmarkImageView
-            UserDefaults.standard.set(self.selectedFilter?.rawValue, forKey: "selectedFilter")
+            UserDefaults.standard.set(self.selectedFilter?.rawValue, forKey: selectedFilter.rawValue)
         }
         delegate?.useSelectedFilter(selectedFilter: self.selectedFilter ?? Filters.allTrackers)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

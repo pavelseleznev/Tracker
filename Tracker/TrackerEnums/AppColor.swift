@@ -8,14 +8,14 @@
 import UIKit
 
 enum AppColor {
-    static let ypLightGray = UIColor(named: "ypLightGray")
-    static let ypGreen = UIColor(named: "ypGreen")
-    static let ypBlack = UIColor(named: "ypBlack")
-    static let ypWhite = UIColor(named: "ypWhite")
-    static let ypBlue = UIColor(named: "ypBlue")
-    static let ypGray = UIColor(named: "ypGray")
-    static let ypRed = UIColor(named: "ypRed")
-    static let ypDatePickerGray = UIColor(named: "ypDatePickerGray")
+    static let ypLightGray = UIColor(resource: .ypLightGray)
+    static let ypGreen = UIColor(resource: .ypGreen)
+    static let ypBlack = UIColor(resource: .ypBlack)
+    static let ypWhite = UIColor(resource: .ypWhite)
+    static let ypBlue = UIColor(resource: .ypBlue)
+    static let ypGray = UIColor(resource: .ypGray)
+    static let ypRed = UIColor(resource: .ypRed)
+    static let ypDatePickerGray = UIColor(resource: .ypDatePickerGray)
     static let ypBackgroundColor = UIColor(named: "ypBackgroundColor")
     
     static let colorSelection: [String: UIColor] = [

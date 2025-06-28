@@ -167,7 +167,7 @@ final class TypeOfTrackerViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private var previouslySelectedIndexPath: IndexPath?
     private var isTrackerNameEmpty: Bool = false
     private var color: UIColor?
@@ -177,7 +177,7 @@ final class TypeOfTrackerViewController: UIViewController {
     private var colorIndex: IndexPath?
     private var topMargin = 24
     private var category: TrackerCategory?
-        
+    
     private let emojiArray: [String] = ["🙂", "😻", "🌺", "🐶", "❤️", "😱", "😇", "😡", "🥶", "🤔", "🙌", "🍔", "🥦", "🏓", "🥇", "🎸", "🏝️", "😪"]
     
     private let colorArray: [UIColor] = [
@@ -244,11 +244,13 @@ final class TypeOfTrackerViewController: UIViewController {
     }
     
     private func checkCounterLabel() {
-        if daysCounter != nil {
-            counterLabel.isHidden = false
-            counterLabel.text = daysCounter
-            topMargin = 126
+        guard let daysCounter = daysCounter else {
+            counterLabel.isHidden = true
+            return
         }
+        counterLabel.isHidden = false
+        counterLabel.text = daysCounter
+        topMargin = 126
     }
     
     private func showEditingTracker() {
@@ -397,7 +399,7 @@ final class TypeOfTrackerViewController: UIViewController {
         let trackerEmoji = self.emoji ?? "❤️"
         let trackerSchedule = self.schedule
         let trackerDate = editingTracker?.trackerDate ?? Date()
-
+        
         let newTracker = Tracker(
             trackerID: trackerID,
             trackerName: trackerName,

@@ -8,26 +8,26 @@
 import Foundation
 
 enum Weekdays: String, CaseIterable, Codable {
-    case Monday = "Monday"
-    case Tuesday = "Tuesday"
-    case Wednesday = "Wednesday"
-    case Thursday = "Thursday"
-    case Friday = "Friday"
-    case Saturday = "Saturday"
-    case Sunday = "Sunday"
+    case monday = "Monday"
+    case tuesday = "Tuesday"
+    case wednesday = "Wednesday"
+    case thursday = "Thursday"
+    case friday = "Friday"
+    case saturday = "Saturday"
+    case sunday = "Sunday"
     
     var localizedNameFull: String {
         let locale = Locale.current
         switch locale.languageCode {
         case "ru":
             switch self {
-            case .Monday: return "Понедельник"
-            case .Tuesday: return "Вторник"
-            case .Wednesday: return "Среда"
-            case .Thursday: return "Четверг"
-            case .Friday: return "Пятница"
-            case .Saturday: return "Суббота"
-            case .Sunday: return "Воскресенье"
+            case .monday: return "Понедельник"
+            case .tuesday: return "Вторник"
+            case .wednesday: return "Среда"
+            case .thursday: return "Четверг"
+            case .friday: return "Пятница"
+            case .saturday: return "Суббота"
+            case .sunday: return "Воскресенье"
             }
         default:
             return self.rawValue
@@ -36,20 +36,13 @@ enum Weekdays: String, CaseIterable, Codable {
     
     var numberValue: Int {
         switch self {
-        case .Monday:
-            return 2
-        case .Tuesday:
-            return 3
-        case .Wednesday:
-            return 4
-        case .Thursday:
-            return 5
-        case .Friday:
-            return 6
-        case .Saturday:
-            return 7
-        case .Sunday:
-            return 1
+        case .monday: 2
+        case .tuesday: 3
+        case .wednesday: 4
+        case .thursday: 5
+        case .friday: 6
+        case .saturday: 7
+        case .sunday: 1
         }
     }
     
@@ -58,42 +51,42 @@ enum Weekdays: String, CaseIterable, Codable {
         switch locale.languageCode {
         case "ru":
             switch self {
-            case .Monday: return "Пн"
-            case .Tuesday: return "Вт"
-            case .Wednesday: return "Ср"
-            case .Thursday: return "Чт"
-            case .Friday: return "Пт"
-            case .Saturday: return "Сб"
-            case .Sunday: return "Вс"
+            case .monday: return "Пн"
+            case .tuesday: return "Вт"
+            case .wednesday: return "Ср"
+            case .thursday: return "Чт"
+            case .friday: return "Пт"
+            case .saturday: return "Сб"
+            case .sunday: return "Вс"
             }
         default:
             switch self {
-            case .Monday: return "Mon"
-            case .Tuesday: return "Tue"
-            case .Wednesday: return "Wed"
-            case .Thursday: return "Thu"
-            case .Friday: return "Fri"
-            case .Saturday: return "Sat"
-            case .Sunday: return "Sun"
+            case .monday: return "Mon"
+            case .tuesday: return "Tue"
+            case .wednesday: return "Wed"
+            case .thursday: return "Thu"
+            case .friday: return "Fri"
+            case .saturday: return "Sat"
+            case .sunday: return "Sun"
             }
         }
     }
     
     var numberValueRus: Int {
         switch self {
-        case .Monday:
+        case .monday:
             return 1
-        case .Tuesday:
+        case .tuesday:
             return 2
-        case .Wednesday:
+        case .wednesday:
             return 3
-        case .Thursday:
+        case .thursday:
             return 4
-        case .Friday:
+        case .friday:
             return 5
-        case .Saturday:
+        case .saturday:
             return 6
-        case .Sunday:
+        case .sunday:
             return 7
         }
     }

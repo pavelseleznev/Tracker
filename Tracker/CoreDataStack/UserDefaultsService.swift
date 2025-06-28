@@ -15,10 +15,16 @@ final class UserDefaultsService {
     
     private enum Key {
         static let hasLaunchedBefore = "hasLaunchedBefore"
+        static let selectedFilter = "selectedFilter"
     }
     
     var hasLaunchedBefore: Bool {
         get { defaults.bool(forKey: Key.hasLaunchedBefore) }
         set { defaults.set(newValue, forKey: Key.hasLaunchedBefore) }
+    }
+    
+    var selectedFilter: Bool {
+        get { defaults.bool(forKey: Key.selectedFilter) }
+        set { defaults.set(newValue, forKey: Key.selectedFilter) }
     }
 }

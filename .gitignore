@@ -4,6 +4,9 @@ Pods/
 # Ignore Tracker.xcworkspace
 Tracker.xcworkspace
 
+# Ignore xcuserdata folder
+*.xcuserdatad/
+
 
 
 
