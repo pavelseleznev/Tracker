@@ -9,6 +9,7 @@ import UIKit
 
 final class ColorCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
     private let colorCollectionView: UIView = {
         let colorCollectionView = UIView()
         colorCollectionView.layer.cornerRadius = 8
@@ -38,6 +39,7 @@ final class ColorCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Methods
     func configure(color: UIColor) {
         colorCollectionView.backgroundColor = color
         colorCellLayerView.layer.borderColor = color.withAlphaComponent(0.3).cgColor

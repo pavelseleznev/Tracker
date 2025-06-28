@@ -9,9 +9,10 @@ import UIKit
 
 final class TrackerPropertiesCell: UITableViewCell {
     
+    //MARK: - Properties
     weak var delegate: TrackerPropertiesCellDelegate?
     private var indexPath: IndexPath?
-    private let properties = ["Категория", "Расписание"]
+    private let properties = [NSLocalizedString("category.title", comment: "Category title"), NSLocalizedString("schedule.title", comment: "Schedule title")]
     
     private lazy var categoryAndScheduleLabels: UILabel = {
         let propertiesTitleLabel = UILabel()
@@ -56,6 +57,7 @@ final class TrackerPropertiesCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Methods
     func configure(indexPath: IndexPath) {
         self.indexPath = indexPath
         categoryAndScheduleLabels.text = properties[indexPath.row]

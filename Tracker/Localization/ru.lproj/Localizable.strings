@@ -1,0 +1,91 @@
+/* 
+  Localizable.strings
+  Tracker
+
+  Created by Pavel Seleznev on 6/11/25.
+  
+*/
+
+"trackers.title" = "Трекеры";
+"statistics.title" = "Статистика";
+"emptyState.title" = "Что будем отслеживать?";
+"searchEmptyLabel.text" = "Ничего не найдено";
+"searchTextField.placeholder" = "Поиск";
+
+"onboardingBlue.title" = "Отслеживайте только то, что хотите";
+"onboardingRed.title" = "Даже если это не литры воды и йога";
+"onboardingButton.title" = "Вот это технологии!";
+
+"deleteCategory.confirmation" = "Эта категория точно не нужна?";
+"delete" = "Удалить";
+"cancel" = "Отменить";
+"edit" = "Редактировать";
+"save" = "Сохранить";
+
+"createTrackers.title" = "Создание трекера";
+"regularHabit.title" = "Привычка";
+"singleTracker.title" = "Нерегулярные событие";
+
+"enterTrackerName.placeholder" = "Введите название трекера";
+"nameFieldCharacterLimit" = "Ограничение 38 символов";
+"create" = "Создать";
+"colorLabel" = "Цвет";
+
+"singleTracker.title" = "Новое нерегулярное событие";
+"regularHabit.title" = "Новая привычка";
+"everyDay.text" = "Каждый день";
+"editingTracker.title" = "Редактирование привычки";
+
+"category.title" = "Категория";
+"schedule.title" = "Расписание";
+"newCategory.title" = "Новая категория";
+"editingCategory.title" = "Редактирование категории";
+"categoryNameField.placeholder" = "Введите название категории";
+
+"placeholderLabel" = "Привычки и события можно объединить по смыслу";
+"addCategoryButton.title" = "Добавить категорию";
+"doneButton.title" = "Готово";
+
+"pinned.title" = "Закрепленные";
+"pin" = "Закрепить";
+"unpin" = "Открепить";
+"edit" = "Редактировать";
+"delete" = "Удалить";
+
+"delete.confirmation" = "Уверены что хотите удалить трекер?";
+"delete" = "Удалить";
+"cancel" = "Отменить";
+
+"filterButton.title" = "Фильтры";
+
+"allTrackers" = "Все трекеры";
+"todayTrackers" = "Трекеры на сегодня";
+"completedTrackers" = "Завершенные";
+"notCompletedTrackers" = "Не завершенные";
+
+"placeholderLabelStat" = "Анализировать пока нечего";
+"bestPeriod" = "Лучший период";
+"idealDays" = "Идеальные дни";
+"trackersCompleted" = "Трекеров завершено";
+"averageScore" = "Среднее значениe";
+
+"oneDay" = "день";
+"digitEndingWithOneWithoutEleven" = "день";
+"digitEndingFromTwoToFour" = "дня";
+"otherDaysNumber" = "дней";
+
+"Monday" = "Понедельник";
+"Tuesday" = "Вторник";
+"Wednesday" = "Среда";
+"Thursday" = "Четверг";
+"Friday" = "Пятница";
+"Saturday" = "Суббота";
+"Sunday" = "Воскресенье";
+
+"Mon" = "Пн";
+"Tue" = "Вт";
+"Wed" = "Ср";
+"Thu" = "Чт";
+"Fri" = "Пт";
+"Sat" = "Сб";
+"Sun" = "Вс";

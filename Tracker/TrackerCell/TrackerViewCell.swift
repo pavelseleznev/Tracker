@@ -9,15 +9,17 @@ import UIKit
 
 final class TrackerViewCell: UICollectionViewCell {
     
+    //MARK: - Properties
     weak var delegate: TrackerCellDelegate?
     private var isCompletedToday: Bool = false
     private var trackerID: UUID?
     private var indexPath: IndexPath?
     private let doneImage = UIImage(named: "DoneImage")
     
-    private lazy var trackerViewCell: UIView = {
+    private(set) var trackerViewCell: UIView = {
         let trackerViewCell = UIView()
         trackerViewCell.layer.cornerRadius = 16
+        trackerViewCell.layer.masksToBounds = true
         trackerViewCell.translatesAutoresizingMaskIntoConstraints = false
         return trackerViewCell
     }()
@@ -61,7 +63,7 @@ final class TrackerViewCell: UICollectionViewCell {
         return image ?? UIImage()
     }()
     
-    private lazy var viewCellDayCounter: UILabel = {
+    lazy var viewCellDayCounter: UILabel = {
         let viewCellDayCounter = UILabel()
         viewCellDayCounter.textColor = AppColor.ypBlack
         viewCellDayCounter.text = "0 дней"
@@ -71,21 +73,13 @@ final class TrackerViewCell: UICollectionViewCell {
         return viewCellDayCounter
     }()
     
-    func configure(with tracker: Tracker, isCompletedToday: Bool, completedDays: Int, indexPath: IndexPath) {
-        self.trackerID = tracker.trackerID
-        self.isCompletedToday = isCompletedToday
-        self.indexPath = indexPath
-        
-        trackerViewCell.backgroundColor = UIColor(named: tracker.trackerColor)
-        viewCellPlusButton.backgroundColor = UIColor(named: tracker.trackerColor)
-        
-        viewCellLabel.text = tracker.trackerName
-        viewCellEmoji.text = tracker.trackerEmoji
-        let image = isCompletedToday ? doneImage : viewCellPlusImage
-        viewCellPlusButton.setImage(image, for: .normal)
-        viewCellPlusButton.alpha = isCompletedToday ? 0.3 : 1.0
-        viewCellDayCounter.text = completedDays.days()
-    }
+    private lazy var pinImage = {
+        let pinImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 8, height: 12))
+        pinImage.image = UIImage(named: "Pin")
+        pinImage.contentMode = .center
+        pinImage.translatesAutoresizingMaskIntoConstraints = false
+        return pinImage
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -97,12 +91,39 @@ final class TrackerViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Methods
+    func configure(
+        with tracker: Tracker,
+        category: String,
+        isCompletedToday: Bool,
+        completedDays: Int,
+        indexPath: IndexPath
+    ) {
+        self.trackerID = tracker.trackerID
+        self.isCompletedToday = isCompletedToday
+        self.indexPath = indexPath
+        
+        trackerViewCell.backgroundColor = UIColor(named: tracker.trackerColor)
+        viewCellPlusButton.backgroundColor = UIColor(named: tracker.trackerColor)
+        
+        viewCellLabel.text = tracker.trackerName
+        viewCellEmoji.text = tracker.trackerEmoji
+        let image = isCompletedToday ? doneImage : viewCellPlusImage
+        
+        pinImage.image = category == "pinned" ? UIImage(named: "Pin") : .none
+        
+        viewCellPlusButton.setImage(image, for: .normal)
+        viewCellPlusButton.alpha = isCompletedToday ? 0.3 : 1.0
+        viewCellDayCounter.text = completedDays.days()
+    }
+    
     private func setupSubviews() {
         contentView.addSubview(trackerViewCell)
-        contentView.addSubview(viewCellLabel)
-        contentView.addSubview(viewCellEmoji)
         contentView.addSubview(viewCellPlusButton)
         contentView.addSubview(viewCellDayCounter)
+        contentView.addSubview(pinImage)
+        trackerViewCell.addSubview(viewCellLabel)
+        trackerViewCell.addSubview(viewCellEmoji)
     }
     
     private func setupConstraints() {
@@ -129,7 +150,12 @@ final class TrackerViewCell: UICollectionViewCell {
             viewCellDayCounter.topAnchor.constraint(equalTo: trackerViewCell.bottomAnchor, constant: 16),
             viewCellDayCounter.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             viewCellDayCounter.widthAnchor.constraint(equalToConstant: 101),
-            viewCellDayCounter.heightAnchor.constraint(equalToConstant: 18)
+            viewCellDayCounter.heightAnchor.constraint(equalToConstant: 18),
+            
+            pinImage.topAnchor.constraint(equalTo: trackerViewCell.topAnchor, constant: 12),
+            pinImage.trailingAnchor.constraint(equalTo: trackerViewCell.trailingAnchor, constant: -4),
+            pinImage.widthAnchor.constraint(equalToConstant: 24),
+            pinImage.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
